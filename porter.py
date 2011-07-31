@@ -30,6 +30,7 @@ This is an example of using the porter module with a custom namespace:
     >>> import root.spam
     >>> import root.ham.eggs
     >>> from root.shop import parrot
+    >>> from root import lumberjack
 
     >>> root.spam.spam()
     'Spam module'
@@ -37,6 +38,8 @@ This is an example of using the porter module with a custom namespace:
     'Eggs module'
     >>> parrot.parrot()
     'Parrot module'
+    >>> lumberjack.lumberjack()
+    'LumberJack module'
 
 This is an example to test that the module fails appropriately when provided
 with an environment variable that doesn't exist.
