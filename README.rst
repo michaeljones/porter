@@ -1,4 +1,3 @@
-
 Porter
 ======
 
@@ -62,7 +61,7 @@ described in PEP 302. We add the hook to the ``sys.meta_path`` which is tried
 before the standard import mechanism is employed.
 
 The environment variable is only parsed once per Python session, when the hook
-is created, and then very every module that is imported we check our map to see
+is created, and then for every module that is imported we check our map to see
 if the module name is one of our keys and if it is found we return a custom
 loader object which is prepped with the correct location from the map.
 
