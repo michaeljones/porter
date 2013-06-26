@@ -192,7 +192,7 @@ class RootPorter(object):
         return None
 
 
-def from_string(value, entry_split=":", key_value_split="=", root=""):
+def from_string(value, entry_split=":", key_value_split="=", module_value_split=",", root=""):
     """
     Parses the given string value based on the split characters provided and
     returns an appropriate import hook taking into account the value of "root".
@@ -203,8 +203,11 @@ def from_string(value, entry_split=":", key_value_split="=", root=""):
     entries = value.split(entry_split)
     path_map = {}
     for entry in entries:
-        name, path = entry.split(key_value_split)
-        path_map[name] = path
+        key, path = entry.split(key_value_split)
+
+        modules = key.split(module_value_split)
+        for module in modules:
+            path_map[module] = path
 
     if root:
         return RootPorter(root, path_map)
@@ -212,7 +215,7 @@ def from_string(value, entry_split=":", key_value_split="=", root=""):
     return Porter(path_map)
 
 
-def from_env(env_var, entry_split=":", key_value_split="=", root=""):
+def from_env(env_var, entry_split=":", key_value_split="=", module_value_split=",", root=""):
     """
     Looks up the named environment variable and uses from_string to handle the
     contents.
@@ -232,6 +235,7 @@ def from_env(env_var, entry_split=":", key_value_split="=", root=""):
             value,
             entry_split=entry_split,
             key_value_split=key_value_split,
+            module_value_split=module_value_split,
             root=root
             )
 
